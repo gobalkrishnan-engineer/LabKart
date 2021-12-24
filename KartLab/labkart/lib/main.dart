@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:labkart/pages/home.dart';
 
 void main() {
   runApp(LabKart());
@@ -9,6 +11,10 @@ class LabKart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
+      home: Home(),
+    );
   }
 }
