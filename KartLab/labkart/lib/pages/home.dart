@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
       body: Padding(
           padding: EdgeInsets.symmetric(horizontal: HOME_HORIZONTAL_PADDING),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "LabKart",
@@ -21,10 +22,15 @@ class Home extends StatelessWidget {
                     fontSize: HOME_FONTSIZE,
                     fontFamily: "Arial"),
               ),
+              Text("Enjoy the LabKart product"),
               SizedBox(
-                height: 50,
+                height: 100,
               ),
               categories(),
+              SizedBox(
+                height: 100,
+              ),
+              Text("  copyright@ 2021")
             ],
           )),
     );
@@ -42,6 +48,8 @@ class Home extends StatelessWidget {
     ApiUrl.WOMEN,
     ApiUrl.KID,
   ];
+
+  List name = ["Electronic", "Men Shirt/Pant", "Women Shirt/Pant", "Kid toy"];
   Widget categories() {
     return GridView.count(
       shrinkWrap: true,
@@ -51,8 +59,9 @@ class Home extends StatelessWidget {
           (index) => GestureDetector(
                 onTap: () {
                   Get.to(() => ProductList(
-                      api: home_categories_api[index],
-                      length: ApiUrl.list_length[index]));
+                        api: home_categories_api[index],
+                        length: ApiUrl.list_length[index],
+                      ));
                 },
                 child: Container(
                   width: Get.width,
@@ -62,10 +71,20 @@ class Home extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(HOME_BORDER_RADIUS)),
                     elevation: 5,
-                    child: Image.network(
-                      home_categories[index],
-                      fit: BoxFit.contain,
-                    ),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            home_categories[index],
+                            fit: BoxFit.contain,
+                            width: 100,
+                            height: 100,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("${name[index]}")
+                        ]),
                   ),
                 ),
               )),

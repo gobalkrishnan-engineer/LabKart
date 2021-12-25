@@ -14,7 +14,7 @@ class LabKart extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: Home(),
+      home: SafeArea(child: Home()),
     );
   }
 }
