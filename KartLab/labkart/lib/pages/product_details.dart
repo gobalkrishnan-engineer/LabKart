@@ -2,19 +2,35 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:labkart/component/pop_up.dart';
+import 'package:labkart/controller/cart_controller.dart';
 import 'package:labkart/theme/theme.dart';
+
+import 'cart_list.dart';
+import 'cart_product.dart';
 
 class ProductDetail extends StatelessWidget {
   var api, name, price, index;
   ProductDetail({Key? key, this.api, this.name, this.price, this.index})
       : super(key: key);
 
+  var cartController = Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notification_add))
+          IconButton(
+              onPressed: () {
+                Get.to(() => CartList());
+              },
+              icon: Icon(Icons.notification_add)),
+          Align(
+              alignment: Alignment.center,
+              child:
+                  Obx(() => Text("${cartController.cartList.value.length}"))),
+          SizedBox(width: 20)
         ],
         backgroundColor: ORANGE,
         title: Text("Product Details"),
@@ -44,7 +60,7 @@ class ProductDetail extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(HOME_BORDER_RADIUS)),
               child: Image.network(
-                api + "$index.jpg",
+                api + "$index.jpg" + "?dummy=$index",
                 width: Get.width,
                 height: Get.height / 2,
               ),
@@ -63,13 +79,20 @@ class ProductDetail extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    CartDetail cartdetail = CartDetail(
+                        api: api, name: name, price: price, index: index);
+                    cartController.cartList.add(cartdetail);
+                    cartController.total.value += price;
+                  },
                   icon: Icon(
                     Icons.add_shopping_cart_rounded,
                     color: Colors.orange,
                   )),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    popUp();
+                  },
                   icon: Icon(
                     Icons.share,
                     color: Colors.orange,

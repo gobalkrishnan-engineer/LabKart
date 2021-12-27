@@ -12,26 +12,28 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: Padding(
           padding: EdgeInsets.symmetric(horizontal: HOME_HORIZONTAL_PADDING),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "LabKart",
-                style: TextStyle(
-                    color: ORANGE,
-                    fontSize: HOME_FONTSIZE,
-                    fontFamily: "Arial"),
-              ),
-              Text("Enjoy the LabKart product"),
-              SizedBox(
-                height: 100,
-              ),
-              categories(),
-              SizedBox(
-                height: 100,
-              ),
-              Text("  copyright@ 2021")
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "LabKart",
+                  style: TextStyle(
+                      color: ORANGE,
+                      fontSize: HOME_FONTSIZE,
+                      fontFamily: "Arial"),
+                ),
+                Text("Enjoy the LabKart product"),
+                SizedBox(
+                  height: 100,
+                ),
+                categories(),
+                SizedBox(
+                  height: 100,
+                ),
+                Text("  copyright@ 2021")
+              ],
+            ),
           )),
     );
   }
@@ -75,7 +77,7 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.network(
-                            home_categories[index],
+                            home_categories[index] + "?dummy=$index",
                             fit: BoxFit.contain,
                             width: 100,
                             height: 100,
